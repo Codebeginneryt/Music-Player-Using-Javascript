@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Music Player</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div class="box">
+	<div class="navbar">
+		<div class="logo"><img src="logo.png"></div>
+		<div class="AppName"><h1>MX <span>Player</span></h1></div>
+		<div class="burger">
+			<div class="line"></div>
+			<div class="line"></div>
+			<div class="line"></div>
+		</div>
+	</div>
+	<div class="song">
+		<div class="photo">
+			<img src="background.jpg" id="circle">
+		</div>
+		<div class="SongName">
+			<p id="sname">Horn Blow</p>
+		<audio src="song1.mp3"></audio>
+		</div>
+	</div>
+	<div class="btn">
+		<button id="play">Play</button>
+		<button id="pause">Pause</button>
+		<button id="next">Next</button>
+	</div>
+</div>
+<script type="text/javascript">
+	const music = document.querySelector("audio");
+	const play =document.getElementById('play');
+	const pause =document.getElementById('pause');
+	const next =document.getElementById('next');
+	const sname =document.getElementById('sname');
+	const circle =document.getElementById('circle');
+
+
+	const songs = [
+	{
+		name:"song1",
+		sname:"Horn Blow",
+	},
+	{
+		name:"song2",
+		sname:"Amazing Ring Tune",
+	},
+	{
+		name:"song3",
+		sname:"Allaha Jass Manak",
+	},
+	{
+		name:"song4",
+		sname:"Gaam ki Lugai",
+	},
+	]
+	let isPlaying = false;
+	
+	//play music function
+	play.addEventListener('click',()=>{
+		isPlaying = true;
+		music.play();
+		circle.style.animation = "animate 5s linear infinite";
+
+	})
+
+	//pause music function
+	pause.addEventListener('click',()=>{
+		isPlaying = false;
+		music.pause();
+		circle.style.animation = "initial"
+	})
+
+	//change the music
+	const loadsong = (songs)=>{
+		sname.textContent = songs.sname;
+		music.src = songs.name+".mp3";
+	};
+
+	songIndex = 0;
+
+	const nextsong = () =>{
+		songIndex = (songIndex + 1) % songs.length;
+		//songIndex++;
+		loadsong(songs[songIndex]);
+		music.play();
+		circle.style.animation = "animate 5s linear infinite";
+	};
+
+	next.addEventListener("click", nextsong);
+
+	//rotate picture
+
+
+</script>
+</body>
+</html> 
